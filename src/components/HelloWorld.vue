@@ -41,13 +41,13 @@ export default {
   },
   mounted() {
     if (localStorage.mat) {
-      this.mat = JSON.parse(localStorage.mat);
+    //  this.mat = JSON.parse(localStorage.mat);
     }
     var ref = db.collection('mat');
 
     ref.get().then(querySnapshot => {
       querySnapshot.forEach(doc => {
-          this.math = doc.data().data
+          this.mat = JSON.parse(doc.data().data)
         ;
       });
     });
