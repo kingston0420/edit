@@ -19,6 +19,7 @@ export default {
   methods: {
     set (i,j, e) {
       this.mat[i][j] = e.target.innerText
+      localStorage.mat = JSON.stringify(this.mat);
     }
   },
   data () {
@@ -32,12 +33,12 @@ export default {
   },
   mounted() {
     if (localStorage.mat) {
-      this.mat = localStorage.mat;
+      this.mat = JSON.parse(localStorage.mat);
     }
   },
   watch: {
     mat(newName) {
-      localStorage.mat = newName;
+      localStorage.mat = JSON.stringify(newName);
     }
   }
 }
