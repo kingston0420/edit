@@ -19,7 +19,6 @@ export default {
   methods: {
     set (i,j, e) {
       this.mat[i][j] = e.target.innerText
-      console.log(e.target.innerText)
     }
   },
   data () {
@@ -29,6 +28,16 @@ export default {
         ['Edit', 'Edit', 'Edit', 'Edit'],
         ['Edit', 'Edit', 'Edit', 'Edit']
       ]
+    }
+  },
+  mounted() {
+    if (localStorage.mat) {
+      this.mat = localStorage.mat;
+    }
+  },
+  watch: {
+    mat(newName) {
+      localStorage.mat = newName;
     }
   }
 }
