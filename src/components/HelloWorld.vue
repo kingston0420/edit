@@ -45,7 +45,7 @@ export default {
     }
     var ref = db.collection('mat');
 
-    ref.get().then(querySnapshot => {
+    ref.onSnapshot(querySnapshot => {
       querySnapshot.forEach(doc => {
           this.mat = JSON.parse(doc.data().data)
         ;
