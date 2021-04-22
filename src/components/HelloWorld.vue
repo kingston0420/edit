@@ -2,9 +2,11 @@
   <div class="hello">
     <table>
       <tr v-for="(r, idx) in mat" :key = "idx">
-        <td v-for ="(c, i) in r" :key="i"><div contenteditable @change="set(idx, i, c)">{{c}}</div></td>
+        <td v-for ="(c, i) in r" :key="i"><div contenteditable @input="set(idx, i, $event)">{{c}}</div></td>
       </tr>
     </table>
+
+    {{mat}}
   </div>
 </template>
 
@@ -15,8 +17,9 @@ export default {
     msg: String
   },
   methods: {
-    set (i,j,c) {
-      this.mat[i][j] = c
+    set (i,j, e) {
+      this.mat[i][j] = e.target.innerText
+      console.log(e.target.innerText)
     }
   },
   data () {
