@@ -50,9 +50,13 @@ li {
 a {
   color: #42b983;
 }
+tr, td {
+  border: 1px solid black;
+}
 table {
   border: 1px solid black;
   width: 80%;
   margin: 0 auto;
+  border-collapse: collapse;
 }
 </style>
