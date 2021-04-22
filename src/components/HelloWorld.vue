@@ -11,6 +11,9 @@
 </template>
 
 <script>
+
+import { db } from '../db'
+
 export default {
   name: 'HelloWorld',
   props: {
@@ -20,6 +23,10 @@ export default {
     set (i,j, e) {
       this.mat[i][j] = e.target.innerText
       localStorage.mat = JSON.stringify(this.mat);
+      var ref = db.collection('mat').doc('mat');
+      ref.set({
+        data: JSON.stringify(this.mat)
+      })
     }
   },
   data () {
@@ -28,17 +35,30 @@ export default {
         ['Edit', 'Edit', 'Edit', 'Edit'],
         ['Edit', 'Edit', 'Edit', 'Edit'],
         ['Edit', 'Edit', 'Edit', 'Edit']
-      ]
+      ],
+      db: db
     }
   },
   mounted() {
     if (localStorage.mat) {
       this.mat = JSON.parse(localStorage.mat);
     }
+    var ref = db.collection('mat');
+
+    ref.get().then(querySnapshot => {
+      querySnapshot.forEach(doc => {
+          this.math = doc.data().data
+        ;
+      });
+    });
   },
   watch: {
     mat(newName) {
       localStorage.mat = JSON.stringify(newName);
+      var ref = db.collection('mat').doc('mat');
+      ref.set({
+        data: JSON.stringify(this.mat)
+      })
     }
   }
 }
