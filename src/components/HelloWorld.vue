@@ -1,8 +1,9 @@
 <template>
   <div class="hello">
     <table>
-      <tr><td><div contenteditable>I'm editable</div></td><td><div contenteditable>I'm also editable</div></td></tr>
-      <tr><td>I'm not editable</td></tr>
+      <tr v-for="(r, idx) in mat" :key = "idx">
+        <td v-for ="(c, i) in r" :key="i"><div contenteditable @change="set(idx, i, c)">{{c}}</div></td>
+      </tr>
     </table>
   </div>
 </template>
@@ -12,6 +13,20 @@ export default {
   name: 'HelloWorld',
   props: {
     msg: String
+  },
+  methods: {
+    set (i,j,c) {
+      this.mat[i][j] = c
+    }
+  },
+  data () {
+    return {
+      mat: [
+        ['Edit', 'Edit', 'Edit', 'Edit'],
+        ['Edit', 'Edit', 'Edit', 'Edit'],
+        ['Edit', 'Edit', 'Edit', 'Edit']
+      ]
+    }
   }
 }
 </script>
@@ -31,5 +46,10 @@ li {
 }
 a {
   color: #42b983;
+}
+table {
+  border: 1px solid black;
+  width: 80%;
+  margin: 0 auto;
 }
 </style>
